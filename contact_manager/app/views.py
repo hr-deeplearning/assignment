@@ -3,10 +3,8 @@ from rest_framework.views import APIView
 from .models import Contact
 from .serializers import ContactSerializer, UserSignUpSerializers
 from rest_framework import permissions
-from rest_framework import renderers
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django.http import JsonResponse
 from django.db.models import Prefetch
 from app.models import ContactPhone
 from app.permissions import IsOwner
@@ -24,7 +22,6 @@ class SignUpAPIView(APIView):
     """
 
     def post(self, request, format=None):
-
         try:
             data = request.data
             email = data.get("email", None)
@@ -62,7 +59,6 @@ class LoginAPIView(APIView):
     """
 
     def post(self, request, formate=None):
-
         try:
             data = request.data
             email = data.get("email", None)
@@ -90,7 +86,6 @@ class LoginAPIView(APIView):
 
 
 class ContactViewSet(viewsets.ModelViewSet):
-
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwner]
